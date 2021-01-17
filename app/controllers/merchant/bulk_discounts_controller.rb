@@ -14,7 +14,6 @@ class Merchant::BulkDiscountsController < ApplicationController
   def edit
     find_merchant
     @discount = BulkDiscount.find(params[:id])
-    # require 'pry'; binding.pry
   end
 
   def destroy

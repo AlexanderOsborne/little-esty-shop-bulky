@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'as a merchant', type: :feature do
-  describe 'when I visit my bulk disocunt show page' do
+  describe 'when I visit my bulk discount show page' do
     before(:each) do
     @merchant1 = Merchant.create!(name: 'Hair Care')
 

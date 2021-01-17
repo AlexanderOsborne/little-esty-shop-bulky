@@ -96,4 +96,10 @@ RSpec.describe 'invoices show' do
      end
   end
 
+  it 'applies bulk discounts to invoice' do
+    @bulk_discount1 = BulkDiscount.create!(percentage_discount: 25, quantity_threshold: 8, merchant_id: @merchant1.id, item_id: @item_1.id)
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+    expect(page).to have_content(7.5)
+    expect(page).to_not have_content(10)
+  end
 end

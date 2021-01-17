@@ -60,9 +60,7 @@ RSpec.describe 'Bulk Index', type: :feature do
 
     it 'I see a link to delete a discount, when I click this link I am redirected back to the index' do
       visit merchant_bulk_discounts_path(@merchant1.id)  
-      
       click_link("Delete", match: :first)
-      # save_and_open_page
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1.id))
       expect(page).to have_no_content(@bulk_discount1.percentage_discount)
       expect(page).to have_content(@bulk_discount2.percentage_discount)
