@@ -14,6 +14,7 @@ class Invoice < ApplicationRecord
 
   def total_revenue
     apply_discount
+    # require 'pry'; binding.pry
     invoice_items.sum("unit_price * quantity")
   end
 
