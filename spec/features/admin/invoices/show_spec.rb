@@ -54,7 +54,8 @@ describe 'Admin Invoices Index Page' do
 
   it 'should display the total revenue the invoice will generate' do
 
-    expect(page).to have_content("Total Revenue: $18")
+    within "Total Revenue: $#{@i1.total_revenue}"
+    expect(page).to have_content(18)
     expect(page).to_not have_content(@i2.total_revenue)
   end
 
@@ -70,7 +71,7 @@ describe 'Admin Invoices Index Page' do
   end
 
   it 'take into account bulk discounts' do
-    # save_and_open_page
+
     within "Total Revenue: $#{@i1.total_revenue}"
     expect(page).to have_content(18)
   end
