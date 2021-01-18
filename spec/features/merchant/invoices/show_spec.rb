@@ -117,6 +117,5 @@ RSpec.describe 'invoices show' do
     visit merchant_invoice_path(@merchant1, @invoice_1)
 
     expect(page).to have_no_link("Discount ",)
-    save_and_open_page
   end
 end
