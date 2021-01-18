@@ -28,7 +28,7 @@
   <h4> Discounts:</h4>
   <% @invoice.items.each do |item| %>
     <%  item.bulk_discounts.each do |discount|%>
-        <li><%= link_to "Discount ##{discount.id}", admin_invoice_path(i) %></li>
+        <li><%= link_to "Discount #{discount.id}", merchant_bulk_discount_path(id: discount.id, merchant_id: discount.merchant_id) %></li>
     <% end %>
   <% end %>
   <h4>Items on this Invoice:</h4>
