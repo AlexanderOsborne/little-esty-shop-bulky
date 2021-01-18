@@ -40,9 +40,11 @@ class Merchant::BulkDiscountsController < ApplicationController
   end
 
   def update
+    bulk_discount_params1 = bulk_discount_params
     @discount = BulkDiscount.find(params[:id])
     if @discount.save
-      @discount.update(bulk_discount_params)
+      bulk_discount_params1["item_id"] = @discount[:item_id]
+      @discount.update(bulk_discount_params1)
     else
       render edit
     end
