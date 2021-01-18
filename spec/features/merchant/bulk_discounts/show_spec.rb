@@ -35,7 +35,6 @@ RSpec.describe 'as a merchant', type: :feature do
     end
 
     it 'When I visit my bulk discount show page I see the bulk discounts quantity and price' do
-      # require 'pry'; binding.pry
       visit merchant_bulk_discount_path(id: @bulk_discount1.id, merchant_id: @bulk_discount1.merchant_id)
 
       expect(page).to have_content(@bulk_discount1.percentage_discount)
