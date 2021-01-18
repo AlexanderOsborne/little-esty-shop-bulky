@@ -4,6 +4,6 @@
     <%= f.label :name, 'Threshold:' %><br>
     <%= f.text_field :quantity_threshold%><br>
     <%= f.label :name, 'Item' %><br>
-    <%= f.select :item_id, Item.all.collect {|item| [item.name, item.id]}, include_blank: false%><br>
+    <%= f.select :item_id, Item.all.collect {|item| [item.name, item.id]}, include_blank: "All"%><br>
     <%= f.submit %>
   <% end %>
