@@ -102,4 +102,21 @@ RSpec.describe 'invoices show' do
     expect(page).to have_content(7.5)
     expect(page).to_not have_content(10)
   end
+
+  it 'displays bulk discounts as a link if they exsist' do
+    @bulk_discount1 = BulkDiscount.create!(percentage_discount: 25, quantity_threshold: 8, merchant_id: @merchant1.id, item_id: @item_1.id)
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+
+    expect(page).to have_link("Discount #{@bulk_discount1.id}",)
+
+    click_link "#{@bulk_discount1.id}"
+    expect(current_path).to eq(merchant_bulk_discount_path(id: @bulk_discount1.id, merchant_id: @bulk_discount1.merchant_id))
+  end
+
+  it 'displays no bulk discounts as a link if they dont exsist' do
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+
+    expect(page).to have_no_link("Discount ",)
+    save_and_open_page
+  end
 end
