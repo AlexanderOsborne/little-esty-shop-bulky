@@ -24,9 +24,19 @@ class Merchant::BulkDiscountsController < ApplicationController
   end
 
   def create
+    if params["item_id"] == ""
+      bulk_discount_params1 = bulk_discount_params
+      items = Item.all
+        items.each do |item|
+          bulk_discount_params1["item_id"] = item.id
+          BulkDiscount.create!(bulk_discount_params1)
+       end
+       redirect_to merchant_bulk_discounts_path(params[:merchant_id])
+    else
     BulkDiscount.create!(bulk_discount_params)
     flash.notice = 'Discount Has Been Created!'
     redirect_to merchant_bulk_discounts_path(params[:merchant_id])
+    end
   end
 
   def update
