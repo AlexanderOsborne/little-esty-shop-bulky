@@ -31,11 +31,11 @@ class Merchant::BulkDiscountsController < ApplicationController
           bulk_discount_params1["item_id"] = item.id
           BulkDiscount.create!(bulk_discount_params1)
        end
-       redirect_to merchant_bulk_discounts_path(params[:merchant_id])
+      redirect_to merchant_bulk_discounts_path(params[:merchant_id])
     else
-    BulkDiscount.create!(bulk_discount_params)
-    flash.notice = 'Discount Has Been Created!'
-    redirect_to merchant_bulk_discounts_path(params[:merchant_id])
+      BulkDiscount.create!(bulk_discount_params)
+      flash.notice = 'Discount Has Been Created!'
+      redirect_to merchant_bulk_discounts_path(params[:merchant_id])
     end
   end
 
