@@ -48,46 +48,7 @@ RSpec.describe Invoice, type: :model do
       @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 10, status: 1)
       @bulk_discount = BulkDiscount.create!(percentage_discount: 10, quantity_threshold:5, merchant_id: @merchant1.id, item_id: @item_1.id)
 
-      expect(@invoice_1.find_discounts.class).to eq(Hash)
-    end
-
-    it "best_discounts" do
-      @merchant1 = Merchant.create!(name: 'Hair Care')
-      @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
-      @item_8 = Item.create!(name: "Butterfly Clip", description: "This holds up your hair but in a clip", unit_price: 5, merchant_id: @merchant1.id)
-      @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
-      @invoice_1 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_1.id, status: 2, created_at: "2012-03-27 14:54:09")
-      @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 10, unit_price: 10, status: 2)
-      @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 10, status: 1)
-      @bulk_discount = BulkDiscount.create!(percentage_discount: 10, quantity_threshold:5, merchant_id: @merchant1.id, item_id: @item_1.id)
-      
-      expect(@invoice_1.best_discount.class).to eq(Hash)
-    end
-
-    it 'get_invoice_items' do
-      @merchant1 = Merchant.create!(name: 'Hair Care')
-      @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
-      @item_8 = Item.create!(name: "Butterfly Clip", description: "This holds up your hair but in a clip", unit_price: 5, merchant_id: @merchant1.id)
-      @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
-      @invoice_1 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_1.id, status: 2, created_at: "2012-03-27 14:54:09")
-      @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 10, unit_price: 10, status: 2)
-      @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 10, status: 1)
-      @bulk_discount = BulkDiscount.create!(percentage_discount: 10, quantity_threshold:5, merchant_id: @merchant1.id, item_id: @item_1.id)
-
-      expect(@invoice_1.get_invoice_items).to eq([@ii_1, @ii_11])
-    end
-
-    it 'get_discounts' do
-      @merchant1 = Merchant.create!(name: 'Hair Care')
-      @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
-      @item_8 = Item.create!(name: "Butterfly Clip", description: "This holds up your hair but in a clip", unit_price: 5, merchant_id: @merchant1.id)
-      @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
-      @invoice_1 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_1.id, status: 2, created_at: "2012-03-27 14:54:09")
-      @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 10, unit_price: 10, status: 2)
-      @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 10, status: 1)
-      @bulk_discount = BulkDiscount.create!(percentage_discount: 10, quantity_threshold:5, merchant_id: @merchant1.id, item_id: @item_1.id)
-
-      expect(@invoice_1.get_discounts).to eq([@bulk_discount])
+      expect(@invoice_1.find_discounts.first.percentage_discount).to eq(@bulk_discount.percentage_discount)
     end
   end
 end
